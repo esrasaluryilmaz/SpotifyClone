@@ -19,4 +19,17 @@ export class API {
     const formattedData = data.tracks.hits.map((item) => item.track);
     return formattedData;
   }
+  // Aratilan sarki verisini alan fonk.
+  async searchMusic(query) {
+    const url = `https://shazam.p.rapidapi.com/search?term=${query}`;
+    // Aratilan deger ile api a destek at
+    const res = await fetch(url, options);
+    // Gelen veriyi js nesnesine cevir
+    const data = await res.json();
+
+    //Veriyi projeye uygun sekilde donustur
+    const formattedData = data.tracks.hits.map((item) => item.track);
+
+    return formattedData;
+  }
 }

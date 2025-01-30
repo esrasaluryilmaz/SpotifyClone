@@ -9,15 +9,15 @@ const ui = new UI();
 // API classinin ornegini al
 const api = new API();
 
-// Sayfanin yiklendigi ani izle
-// document.addEventListener("DOMContentLoaded", async () => {
-//api
-//.getPopular()
-//.then(() => {})
-//.catch((err) => {
-//console.log(err);
-//});
-//});
+// Sayfanin yuklendigi ani izle
+document.addEventListener("DOMContentLoaded", async () => {
+  api
+    .getPopular()
+    .then((data) => ui.renderCards(data))
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 //Form gonderildiginde bunu izle ve bir fonk. calistir
 ui.form.addEventListener("submit", (e) => {
@@ -26,11 +26,16 @@ ui.form.addEventListener("submit", (e) => {
   // form gonderildiginde input icerisindeki degere eris.
   const query = e.target[0].value;
 
-  console.log(query);
   //Aratilan kelimenini basinda ve sonunda bulunan bosluklari kaldir. Eger query degeri yoksa uyari ver.
 
   if (!query.trim()) {
     return alert(`Lutfen gecerli bir arama islemi gerceklestiriniz`);
   }
-  api.getPopular();
+
+  //Aratilan kelimeyle birlikte api istek at sonrasinda gelen veriyle ekrana cartlari render et
+
+  api
+    .searchMusic(query)
+    .then((data) => ui.renderCards(data))
+    .catch((err) => alert(err));
 });
