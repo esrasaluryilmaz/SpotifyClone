@@ -57,7 +57,7 @@ export class UI {
     });
   }
 
-  //Loader Render eden fonk.
+  // Loader render eden fonksiyon
   renderLoader() {
     this.list.innerHTML = `
 <div class="loader">
@@ -76,39 +76,58 @@ export class UI {
   <div class="cell d-3"></div>
   <div class="cell d-4"></div>
   
-  
 </div>`;
   }
 
-  //Title'i guncelleyen fonk.
+  // Title'ı güncelleyen fonksiyon
   updateTitle(text) {
     this.title.textContent = text;
   }
-  //Player kismini dinamik sekilde renderlayacak fonk.
+
+  //Animasyon uygulamasi yapan fonk.
+
+  toggleAnimation() {
+    // Player icerisindeki resme eris
+    const image = document.querySelector(".info img");
+
+    // Resme class-ekle cikar
+    image.classList.toggle("animate");
+  }
+
+  // Player kısmını dinamik şekilde renderlayacak fonksiyon
   renderPlayer(song) {
     console.log(song);
-    this.player.innerHTML = `      <div class="info">
-        <img
-          src="${song.img}"
-          alt="
-        />
-        <div>
-          <h5>${song.title}</h5>
-          <p>${song.subtitle}</p>
-        </div>
+
+    this.player.innerHTML = `
+  <div class="info">
+      <img
+        src="${song.img}"
+        alt=""
+      />
+      <div>
+        <h5>${song.title}</h5>
+        <p>${song.subtitle}</p>
       </div>
+    </div>
 
-      
-      <audio
-        src="${song.mp3}"
-        controls
-      ></audio>
+    <audio
+      src="${song.mp3}"
+      controls
+      autoplay
+    ></audio>
 
-      
-      <div class="icons">
-        <i class="bi bi-music-note-list"></i>
-        <i class="bi bi-boombox"></i>
-        <i class="bi bi-pc-display"></i>
-      </div>`;
+    <div class="icons">
+      <i class="bi bi-music-note-list"></i>
+      <i class="bi bi-boombox"></i>
+      <i class="bi bi-pc-display"></i>
+    </div>`;
+
+    // Sarki oynatiliyorsa image'e bir animasyon ekle durdurulursa bunu kaldir
+
+    // audio elemanina eris
+    const audio = this.player.querySelector("audio");
+    //audio elemaninin oynatma-durdurma olaylarini izle
+    audio.addEventListener("play", this.toggleAnimation);
+    audio.addEventListener("pause", this.toggleAnimation);
   }
 }
