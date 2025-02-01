@@ -118,7 +118,7 @@ main {
               rotate: 360deg;
             }
             i {
-              // Play elemanına tıklanınca i etiketinin  pointer-events değerinden ötürü tıklanılmayı doğru şekilde izleyemedik.Bunu  düzeltmek için i etiketinin  pointer-events'i kaldırdık.
+              // Play elemanına tıklanınca i etiketinin  pointer-events degerinden oturu tıklanılmayı dogru sekilde izleyemedik.Bunu  duzeltmek icin i etiketinin  pointer-events'i kaldirdik.
               pointer-events: none;
             }
           }
